@@ -38,6 +38,15 @@ for i in range(len(points)-1):
     color = speed_color(p1['s'])
     folium.PolyLine(line, color=color, weight=5, opacity=0.8).add_to(m)
 
+# Marker für Punkte mit Zeitstempel
+for p in points:
+    if 't' in p:
+        folium.Marker(
+            location=(p['a'], p['o']),
+            popup=f"Zeit: {p['t']}",
+            icon=folium.Icon(color="blue", icon="info-sign")
+        ).add_to(m)
+
 # Start/Ende markieren
 folium.Marker((points[0]['a'], points[0]['o']), popup="Start", icon=folium.Icon(color="green")).add_to(m)
 folium.Marker((points[-1]['a'], points[-1]['o']), popup="Ende", icon=folium.Icon(color="red")).add_to(m)
